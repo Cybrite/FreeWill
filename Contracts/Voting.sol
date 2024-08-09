@@ -57,7 +57,7 @@ contract VotingCampaign{
         }
 
         delete individuals;
-    } // delete deletes everything expect mapping
+    } // delete deletes everything & resets mapping
 
      
     function getInidviduals() public view returns(address[] memory){
