@@ -1,6 +1,19 @@
-
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
+
+contract pollFactory{
+    address payable[] public deployedPoll;
+
+    function createPoll(string memory about) public {
+        address newPoll = address( new VotingCampaign(about, msg.sender));
+
+        deployedPoll.push(payable(newPoll));
+    }
+
+    function getDeployedPolls() public view returns(address payable[] memory){
+        return deployedPoll;
+    }
+}
 
 
 
@@ -20,9 +33,9 @@ contract VotingCampaign{
     }
   
 
-    constructor(string memory about) {
+    constructor(string memory about, address creator) {
         moto = about;
-        manager = msg.sender;
+        manager = creator;
     }
 
     function Register() public {
