@@ -46,11 +46,17 @@ contract VotingCampaign{
     function Reset() public{
         require(msg.sender == manager);
 
-        delete individuals;
         delete positiveVoteCount;
         delete negativeVoteCount;
         delete voterCount;
 
+        for(uint i =0; i<individuals.length; i++){
+            if(voters[individuals[i]] = true){
+                voters[individuals[i]] = false;
+            }
+        }
+
+        delete individuals;
     } // delete deletes everything expect mapping
 
      
