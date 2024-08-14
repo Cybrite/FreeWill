@@ -1,20 +1,20 @@
+
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.19;
 
 contract pollFactory{
     address payable[] public deployedPoll;
 
-    function createPoll(string memory about) public {
-        address newPoll = address( new VotingCampaign(about, msg.sender));
+    function createPoll(string memory about) public{
+        address newPoll = address(new VotingCampaign(about, msg.sender));
 
-        deployedPoll.push(payable(newPoll));
-    }
+        deployedPoll.push(payable (newPoll));
+    } 
 
-    function getDeployedPolls() public view returns(address payable[] memory){
+    function getDeployed() public view returns(address payable[] memory){
         return deployedPoll;
     }
 }
-
 
 
 
@@ -26,6 +26,7 @@ contract VotingCampaign{
     uint public voterCount;
     uint public positiveVoteCount;
     uint public negativeVoteCount;
+    uint public agreeAbility = positiveVoteCount - negativeVoteCount;
 
     modifier Required(){
         require (voters[msg.sender]);
@@ -63,13 +64,13 @@ contract VotingCampaign{
         delete negativeVoteCount;
         delete voterCount;
 
-        for(uint i =0; i<individuals.length; i++){
+        for(uint i = 0; i<individuals.length; i++){
             if(voters[individuals[i]] = true){
                 voters[individuals[i]] = false;
             }
         }
-
         delete individuals;
+
     } // delete deletes everything & resets mapping
 
      
